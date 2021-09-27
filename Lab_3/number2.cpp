@@ -1,24 +1,22 @@
 #include "Header.h"
 int equation_matrix(int** a, int n, int b, int c) {
-	int k=0;
-	if(a[b][c]==0){
-		k++;
-	}
 	for (int j=0;j<n;j++){
 		if(a[c][j]==1){
 			a[b][j] = 1;
 			a[j][b] = a[b][j];
 		}
 	}
-	if(k==1)
+	if(a[b][c]==0)
 		a[b][b]=0;
+	a[b][c] = 0;
+	a[c][b] = 0;
 	for (int i  = c; i < n - 1; i++) 
 		for (int j = 0; j < n; j++) 
 			a[i][j] = a[i + 1][j];
 	for (int i = 0; i < n; i++) 
 		for (int j = c; j < n - 1; j++) 
 			a[i][j] = a[i][j + 1]; 
-	for(int i=0;i<n;i++)
+	for(int i=0;i<n-1;i++)
 		a[i]= (int*)realloc(a[i],(n-1)*sizeof(int));
 	free(a[n-1]);
 	n--;
@@ -30,20 +28,22 @@ int pullin_matrix(int** a, int n, int b, int c) {
 		printf("\n   ”казанные вершины не соединены");
 		return 0;
 	}
-	for (int j=0;j<n;j++){
+		for (int j=0;j<n;j++){
 		if(a[c][j]==1){
 			a[b][j] = 1;
 			a[j][b] = a[b][j];
 		}
 	}
-	a[b][b]=0;
+	a[b][b] = 0;
+	a[b][c] = 0;
+	a[c][b] = 0;
 	for (int i  = c; i < n - 1; i++) 
 		for (int j = 0; j < n; j++) 
 			a[i][j] = a[i + 1][j];
 	for (int i = 0; i < n; i++) 
 		for (int j = c; j < n - 1; j++) 
 			a[i][j] = a[i][j + 1]; 
-	for(int i=0;i<n;i++)
+	for(int i=0;i<n-1;i++)
 		realloc(a[i],(n-1)*sizeof(int));
 	free(a[n-1]);
 	n--;
